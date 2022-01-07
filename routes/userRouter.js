@@ -18,6 +18,7 @@ const {
   package,
   getRate,
   updateRate,
+  isAdmin,
 } = require("../controllers/userController");
 const { admin, protect } = require("../middleware/authMiddleware");
 
@@ -38,10 +39,11 @@ router.route("/coins").post(protect, coins);
 router.route("/withdarw").post(protect, withdarw);
 router.route("/getWithdarw").get(getwithdarw);
 router.route("/canMine").post(canMine);
+router.route("/isAdmin").post(isAdmin);
 
 router.route("/user/:id").get(singleUser);
 
-router.route("/updateCoins").post(protect, updateCoins);
+router.route("/updateCoins").post(updateCoins);
 
 router.route("/updateProfile").post(protect, updateProfile);
 

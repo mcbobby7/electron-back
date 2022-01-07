@@ -56,19 +56,19 @@ const cryptoSchema = mongoose.Schema(
     },
     btc: {
       type: Number,
-      default: 0,
+      default: 0.0037,
     },
     eth: {
       type: Number,
-      default: 0,
+      default: 0.041,
     },
     bnb: {
       type: Number,
-      default: 0,
+      default: 0.41,
     },
     ltc: {
       type: Number,
-      default: 0,
+      default: 1.18,
     },
 
     walletAddress: [

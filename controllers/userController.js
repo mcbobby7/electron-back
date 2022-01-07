@@ -177,14 +177,13 @@ const notification = asyncHandler(async (req, res) => {
 //@access  Private
 
 const updateCoins = asyncHandler(async (req, res) => {
-  const { btc, eth, bnb, ltc } = req.body;
+  const { btc, eth, bnb, ltc, id } = req.body;
 
-  console.log(req.user);
-
-  let user = await Crypto.findById(req.user._id);
+  let user = await Crypto.findById(id);
+  console.log(user);
 
   if (user) {
-    await Crypto.findByIdAndUpdate(req.user._id, {
+    await Crypto.findByIdAndUpdate(id, {
       btc: btc ? btc : req.user.btc,
       eth: eth ? eth : req.user.eth,
       bnb: bnb ? bnb : req.user.bnb,
@@ -235,6 +234,28 @@ const canMine = asyncHandler(async (req, res) => {
   if (user) {
     await Crypto.findByIdAndUpdate(id, {
       canMine: value,
+    });
+
+    res.json({
+      message: "Successfully updated",
+      hasError: false,
+    });
+  } else {
+    res.json({
+      error: "Error: Invalid details",
+      hasError: true,
+    });
+  }
+});
+
+const isAdmin = asyncHandler(async (req, res) => {
+  const { id, value } = req.body;
+
+  let user = await Crypto.findById(id);
+
+  if (user) {
+    await Crypto.findByIdAndUpdate(id, {
+      isAdmin: value,
     });
 
     res.json({
@@ -555,4 +576,5 @@ module.exports = {
   package,
   getRate,
   updateRate,
+  isAdmin,
 };
