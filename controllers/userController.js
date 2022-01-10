@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const nodemailer = require("nodemailer");
 
-const generateToken = require("../utils/generatetoken");
 const Crypto = require("../models/userModel");
 const Notification = require("../models/notificationModel");
 const Withdraw = require("../models/withdraw");
@@ -11,6 +10,12 @@ const { createdUser } = require("../utils/userUtil");
 //@desc    Register user & get token
 //@route   POST /api/users/register
 //@access  Public
+
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "5d",
+  });
+};
 
 const registerUser = asyncHandler(async (req, res) => {
   let { passkey, routingLicense, name, email, package } = req.body;
