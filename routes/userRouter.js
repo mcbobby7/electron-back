@@ -19,6 +19,7 @@ const {
   getRate,
   updateRate,
   isAdmin,
+  notificationGetSingle,
 } = require("../controllers/userController");
 const { admin, protect } = require("../middleware/authMiddleware");
 
@@ -40,6 +41,7 @@ router.route("/withdarw").post(protect, withdarw);
 router.route("/getWithdarw").get(getwithdarw);
 router.route("/canMine").post(canMine);
 router.route("/isAdmin").post(isAdmin);
+router.route("/notificationGetSingle/:id").get(notificationGetSingle);
 
 router.route("/user/:id").get(singleUser);
 

@@ -143,13 +143,30 @@ const notificationGet = asyncHandler(async (req, res) => {
 
   if (notif) {
     res.json({
-      message: "Notification created successfully",
+      message: "Notifications fetched successfully",
       hasError: false,
       notif,
     });
   } else {
     res.json({
-      message: "Error creating notification",
+      message: "Error getting notifications",
+      hasError: true,
+    });
+  }
+});
+
+const notificationGetSingle = asyncHandler(async (req, res) => {
+  const notif = await Notification.find({ user: req.params.id });
+
+  if (notif) {
+    res.json({
+      message: "Notifications fetched successfully",
+      hasError: false,
+      notif,
+    });
+  } else {
+    res.json({
+      message: "Error getting notifications",
       hasError: true,
     });
   }
@@ -582,4 +599,5 @@ module.exports = {
   getRate,
   updateRate,
   isAdmin,
+  notificationGetSingle,
 };
